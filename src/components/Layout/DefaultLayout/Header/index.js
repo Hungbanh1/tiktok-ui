@@ -13,10 +13,17 @@ import {
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
+    faCloudUpload,
+    faMessage,
+    faUser,
+    faCoins,
+    faGear,
+    faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 // import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css'; // optional
-import Tippy from '@tippyjs/react/headless'; // different import path!
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
+import 'tippy.js/dist/tippy.css';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
@@ -28,6 +35,19 @@ const MEUNU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -43,18 +63,49 @@ const MEUNU_ITEMS = [
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
 
+    const currentUser = true;
+    //handle logic
+    const handleMenuChange = (MenuItem) => {
+        console.log(MenuItem);
+    };
+
     useEffect(() => {
         setTimeout(() => {
             setSearchResult([1, 2, 3]);
         }, 0);
     }, []);
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View Profile',
+            to: '/@sbtcesports',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get Coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MEUNU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
     return (
         <h2 className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="TikTok" />
                 </div>
-                <Tippy
+                <HeadlessTippy
                     // visible={searchResult.length > 0}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -87,38 +138,61 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 <div className={cx('actions')}>
-                    <Button text>Upload</Button>
-                    <Button primary rightIcon={<FontAwesomeIcon icon={faSignIn} />}>
-                        Login
-                    </Button>
-                    {/* <Tippy
-                        // visible
-                        placement="bottom-end"
-                        render={(attrs) => (
-                            <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
-                                <PopperWrapper>
-                                    <h3 className={cx('search-title')}>Accounts</h3>
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                </PopperWrapper>
-                            </div>
+                    {currentUser ? (
+                        // <div className={cx('current-user')}></div>
+                        <>
+                            <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                </button>
+                                {/* <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button> */}
+                            </Tippy>
+                        </>
+                    ) : (
+                        <div>
+                            <Button text>Upload</Button>
+                            <Button primary rightIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                                Login
+                            </Button>
+                            {/* *1 */}
+                        </div>
+                    )}
+                    <Menu items={currentUser ? userMenu : MEUNU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/8026f62e97c52a812d12cf547bfa8515~c5_100x100.jpeg?x-expires=1664614800&x-signature=z6qEGeESR%2Bq%2BRvs2od6X3iXB4WA%3D"
+                                className={cx('user-avatar')}
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
                         )}
-                    > */}
-                    <Menu items={MEUNU_ITEMS}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
                     </Menu>
-                    {/* <Button rounded>Get app</Button> */}
-                    {/* </Tippy> */}
                 </div>
             </div>
         </h2>
     );
 }
-
+{
+    /* <Tippy (*1)
+                            // visible
+                            placement="bottom-end"
+                            render={(attrs) => (
+                                <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
+                                    <PopperWrapper>
+                                        <h3 className={cx('search-title')}>Accounts</h3>
+                                        <AccountItem />
+                                        <AccountItem />
+                                        <AccountItem />
+                                        <AccountItem />
+                                    </PopperWrapper>
+                                </div>
+                            )}
+                        > */
+}
 export default Header;
