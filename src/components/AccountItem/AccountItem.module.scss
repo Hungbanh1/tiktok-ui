@@ -1,12 +1,16 @@
 .wrapper {
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 6px 16px;
-    cursor: pointer;
+    // background: rgba(22, 24, 35, 0.03);
 
     &:hover {
         background: rgba(22, 24, 35, 0.03);
     }
+}
+div#tippy3 {
+    pointer-events: unset;
 }
 
 .avatar {
@@ -14,6 +18,7 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .info {
