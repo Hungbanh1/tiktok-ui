@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+// import axios from 'axios';
+import * as request from '~/utils/request';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -7,7 +9,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './search.module.scss';
 import { useDebounce } from '~/hooks';
-
+import * as searchServices from '~/apiServices/searchServices';
 function Search() {
     const cx = classNames.bind(styles);
     const [searchResult, setSearchResult] = useState([]);
@@ -35,15 +37,44 @@ function Search() {
         }
 
         setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        //call api thong thuong
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     })
+        //     .catch(() => {
+        //         setLoading(false);
+        //     });
+
+        //dung thu vien axios
+        // request
+        //     .get(`users/search`, {
+        //         params: {
+        //             q: debounced,
+        //             type: 'less',
+        //         },
+        //     })
+        //     .then((res) => {
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     })
+        //     .catch(() => {
+        //         setLoading(false);
+        //     });
+
+        //custom api
+
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchServices.search(debounced);
+
+            setSearchResult(result);
+            setLoading(false);
+        };
+        fetchApi();
     }, [debounced]);
 
     return (
