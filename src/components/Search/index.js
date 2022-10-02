@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 // import axios from 'axios';
-import * as request from '~/utils/request';
+import * as request from '~/utils/httpRequest';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -9,7 +9,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './search.module.scss';
 import { useDebounce } from '~/hooks';
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchService';
 function Search() {
     const cx = classNames.bind(styles);
     const [searchResult, setSearchResult] = useState([]);
