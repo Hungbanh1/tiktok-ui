@@ -4,6 +4,8 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Search from '~/components/Search';
+import { Link } from 'react-router-dom';
+
 import {
     faCircleXmark,
     faSpinner,
@@ -28,6 +30,7 @@ import 'tippy.js/dist/tippy.css';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { Mailbox, Message, UploadIcon } from '~/components/Icons';
+import routesConfig from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -95,7 +98,11 @@ function Header() {
         <h2 className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={images.logo} alt="TikTok" />
+                    {/* //sua link logo  */}
+                    {/* */}
+                    <Link to={routesConfig.home} className={cx('logo-link')}>
+                        <img src={images.logo} alt="TikTok" />{' '}
+                    </Link>
                 </div>
                 {/* /// search  */}
                 <Search />
@@ -148,20 +155,5 @@ function Header() {
     );
 }
 {
-    /* <Tippy (*1)
-                            // visible
-                            placement="bottom-end"
-                            render={(attrs) => (
-                                <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
-                                    <PopperWrapper>
-                                        <h3 className={cx('search-title')}>Accounts</h3>
-                                        <AccountItem />
-                                        <AccountItem />
-                                        <AccountItem />
-                                        <AccountItem />
-                                    </PopperWrapper>
-                                </div>
-                            )}
-                        > */
 }
 export default Header;

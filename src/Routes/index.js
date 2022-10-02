@@ -1,16 +1,18 @@
 //public routes
+import routesConfig from '~/config/routes';
 import Home from '~/pages/Home';
 import Following from '~/pages/Following';
 import Profile from '~/pages/Profile';
 import Upload from '~/pages/Upload';
 
 const publicRoutes = [
-    { path: '/', component: Home },
+    { path: routesConfig.home, component: Home },
 
-    { path: '/following', component: Following },
+    { path: routesConfig.following, component: Following },
     // { path: '/profile', component: Profile },
-    { path: '/@:nickname', component: Profile },
-    { path: '/upload', component: Upload, layout: null },
+    { path: routesConfig.profile, component: Profile },
+    { path: routesConfig.upload, component: Upload, layout: null },
+    { path: routesConfig.search, component: Upload, layout: null },
 ];
 const privateRoutes = [];
 

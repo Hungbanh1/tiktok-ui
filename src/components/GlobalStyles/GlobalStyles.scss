@@ -18,6 +18,7 @@
     --search-button-width: 52px;
     --text-color: #161823;
     --white: #fff;
+    --font-family: 'ProximaNova', sans-serif;
 }
 html {
     font-size: 62.5%;
@@ -30,7 +31,7 @@ html {
 }
 
 body {
-    font-family: 'ProximaNova', sans-serif;
+    font-family: var(--font-family);
     font-size: 1.6rem;
     line-height: 1.5;
 }
