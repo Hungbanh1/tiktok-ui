@@ -66,7 +66,7 @@ const MEUNU_ITEMS = [
 ];
 // console.log(images.logo);
 function Header() {
-    const currentUser = true;
+    const currentUser = false;
     //handle logic
     const handleMenuChange = (MenuItem) => {
         console.log(MenuItem);
@@ -132,7 +132,7 @@ function Header() {
                     ) : (
                         <div>
                             <Button text>Upload</Button>
-                            <Button primary rightIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                            <Button primary rightIcon={<FontAwesomeIcon icon={faSignIn} to="/" />}>
                                 Login
                             </Button>
                             {/* *1 */}
