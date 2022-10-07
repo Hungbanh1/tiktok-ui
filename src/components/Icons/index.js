@@ -65,6 +65,7 @@ export const HomeIcon = ({ width = '3.2rem', height = '3.2rem', className }) => 
         ></path>
     </svg>
 );
+
 export const HomeActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
     <svg
         className={className}
@@ -108,6 +109,7 @@ export const UserGroupIcon = ({ width = '3.2rem', height = '3.2rem', className }
         ></path>
     </svg>
 );
+
 export const UserGroupActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
     <svg
         className={className}
@@ -141,6 +143,7 @@ export const LiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => 
         <path d="M15 15.134C15.6667 15.5189 15.6667 16.4811 15 16.866L12 18.5981C11.3333 18.983 10.5 18.5019 10.5 17.7321L10.5 14.2679C10.5 13.4981 11.3333 13.017 12 13.4019L15 15.134Z"></path>
     </svg>
 );
+
 export const LiveActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
     <svg
         className={className}
